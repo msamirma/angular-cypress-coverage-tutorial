@@ -12,10 +12,10 @@
     "cypress:run": "cypress run",
     "e2e:ci": "ng run angular-cypress-coverage-tutorial:e2e-ci",
     "e2e:coverage": "npx nyc report --reporter=lcov --reporter=text-summary",
-    "copy:reports": "(mkdir reports || true) && cp coverage-e2e/coverage-final.json reports/from-cypress.json && cp coverage/coverage-final.json reports/from-jest.json",
+    "copy:reports": "(mkdir reports || true) && cp coverage-e2e/coverage-final.json reports/from-cypress.json && cp coverage/angular-cypress-coverage-tutorial/coverage-final.json reports/from-jest.json",
     "combine:reports": "npx nyc merge reports && mv coverage.json .nyc_output/out.json",
-    "coverage:combined": "yarn copy:reports && yarn combine:reports && yarn finalize:combined-report",
-    "finalize:combined-report": "npm run nyc report --reporter html --reporter text --reporter json-summary --report-dir combined-coverage",
+    "coverage:combined": "npm run copy:reports && yarn combine:reports && yarn finalize:combined-report",
+    "finalize:combined-report": "npx nyc report --reporter html --reporter text --reporter json-summary --report-dir combined-coverage",
     "coverage:reset": "rm -rf .nyc_output && rm -rf reports && rm -rf coverage && rm -rf coverage-e2e && rm -rf combined-coverage",
     "coverage:check": "npx check-total --from combined-coverage/coverage-summary.json --min 95"
   },
